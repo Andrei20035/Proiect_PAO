@@ -23,7 +23,7 @@ public class OrdersManagementService {
         System.out.println("Comanda a fost eliminata.");
     }
 
-    // Metoda pentru a obtine o comanda in functie de ID-ul ei
+    // Metoda pentru a obtine o comanda in functie de ID-ul ei (neimplementata inca)
     // ...
 
     public void displayAllOrdersWithinRange(LocalDateTime start, LocalDateTime end) {
@@ -32,7 +32,7 @@ public class OrdersManagementService {
             LocalDateTime orderDateTime = order.getOrderDateTime();
             if ((orderDateTime.isAfter(start) && orderDateTime.isBefore(end)) || orderDateTime.isEqual(end)
                     || orderDateTime.isEqual(start)) {
-                order.displayOrderDetails();
+                System.out.println(order.toString());
                 System.out.println("---------------------------------");
             }
         }
@@ -41,7 +41,7 @@ public class OrdersManagementService {
     public void displayAllOrders() {
         System.out.println("Orders: ");
         for (Order order : orderList) {
-            order.displayOrderDetails();
+            System.out.println(order.toString());
             System.out.println("---------------------------------");
         }
     }

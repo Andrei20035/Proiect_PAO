@@ -1,12 +1,8 @@
 package Classes;
 
-enum PaymentType {
-    CREDIT_CARD,
-    DEBIT_CARD,
-    PAYPAL,
-    BANK_TRANSFER,
-    CRYPTO,
-}
+import Enums.PaymentType;
+
+import java.util.Objects;
 
 public class PaymentMethod {
     private PaymentType name;
@@ -37,9 +33,24 @@ public class PaymentMethod {
         System.out.println("Processing payment of " + amount + " using " + name);
     }
 
-    public void displayPaymentMethodDetails() {
-        System.out.println("Payment Method: " + name);
-        System.out.println("Description: " + description);
+    public String toString() {
+        return "Payment Method: " + name + "\nDescription: " + description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaymentMethod)) return false;
+        PaymentMethod other = (PaymentMethod) o;
+        return name == other.name &&
+                Objects.equals(description, other.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
+    }
+
+
 }
 

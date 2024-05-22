@@ -3,6 +3,7 @@ package Classes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class User {
     private String name;
@@ -51,18 +52,34 @@ public class User {
         this.birthDate = newBirthDate;
     }
 
-    public void displayOrderHistory() {
-        System.out.println("Order History for User: " + this.name);
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Order History for User: ").append(this.name).append("\n");
         for (Order order : orderHistory) {
-            // System.out.println("Order ID: " + order.getOrderId());
-            System.out.println("Date: " + order.getOrderDateTime());
-            System.out.println("Products:");
+            result.append("Date: ").append(order.getOrderDateTime()).append("\n");
+            result.append("Products:\n");
             for (Product product : order.getProducts()) {
-                System.out.println("- " + product.getName() + " | Price: " + product.getPrice());
+                result.append("- ").append(product.getName()).append(" | Price: ").append(product.getPrice()).append("\n");
             }
-            System.out.println("--------------------");
+            result.append("--------------------\n");
         }
+        return result.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User other = (User) o;
+        return Objects.equals(name, other.name) &&
+                Objects.equals(email, other.email) &&
+                Objects.equals(address, other.address) &&
+                Objects.equals(birthDate, other.birthDate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, email, address, birthDate);
+    }
 }

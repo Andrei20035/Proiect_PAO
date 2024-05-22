@@ -2,11 +2,12 @@ package Classes;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Objects;
 
 public class Report {
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
     private Map<Product, Integer> salesData; // <Product, quantity sold>
 
     public Report(LocalDateTime startDate, LocalDateTime endDate, Map<Product, Integer> salesData) {
@@ -40,4 +41,26 @@ public class Report {
         }
         System.out.println("Total revenue: " + totalRevenue);
     }
+
+    public String toString() {
+        return "Report from " + startDate + " to " + endDate + ":\n" + salesData;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Report)) return false;
+        Report other = (Report) o;
+        return Objects.equals(startDate, other.startDate) &&
+                Objects.equals(endDate, other.endDate) &&
+                Objects.equals(salesData, other.salesData);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(startDate, endDate, salesData);
+    }
+
+
 }
+

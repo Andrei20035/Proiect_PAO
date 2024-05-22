@@ -32,7 +32,7 @@ public class ProductManagementService {
     public void displayAllProducts() {
         System.out.println("Produse disponibile in magazin: ");
         for (Product product : productList) {
-            product.displayDetails();;
+            System.out.println(product.toString());
             System.out.println("-----------------------------------");
         }
 

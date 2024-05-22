@@ -2,6 +2,7 @@ package Classes;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class Order {
     private List<Product> products;
@@ -47,13 +48,32 @@ public class Order {
         return totalPrice;
     }
 
-    public void displayOrderDetails() {
-        System.out.println("Order date and time: " + orderDateTime);
-        System.out.println("Products: ");
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Order date and time: ").append(orderDateTime).append("\n");
+        result.append("Products:\n");
         for (Product product : products) {
-            System.out.println("- " + product.getName() + ": " + product.getPrice());
+            result.append("- ").append(product.getName()).append(": ").append(product.getPrice()).append("\n");
         }
-        System.out.println("Total price: " + calculateTotalPrice(null, null));
+        result.append("Total price: ").append(calculateTotalPrice(null, null));
+        return result.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order other = (Order) o;
+        return Objects.equals(products, other.products) &&
+                Objects.equals(orderDateTime, other.orderDateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(products, orderDateTime);
+    }
+
+
 
 }

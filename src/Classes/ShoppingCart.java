@@ -39,4 +39,16 @@ public class ShoppingCart {
             System.out.println("Product: " + product.getName() + ", Quantity: " + quantity);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Shopping cart:\n");
+        for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            result.append("Product: ").append(product.getName()).append("\nQuantity: ").append(quantity).append("\n");
+        }
+        return result.toString();
+    }
 }

@@ -1,18 +1,14 @@
 package Classes;
 
-enum Categories {
-    ELECTRONICS,
-    CLOTHING,
-    BOOKS,
-    BEAUTY,
-    SPORTS,
-}
+import Enums.Categories;
+
+import java.util.Objects;
 
 public class Product {
-    private String name;
+    private final String name;
     private double price;
     private int stock;
-    private Categories category;
+    private final Categories category;
 
     public Product(String name, double price, int stock, Categories category) {
         this.name = name;
@@ -45,10 +41,25 @@ public class Product {
         this.stock = stock;
     }
 
-    public void displayDetails() {
-        System.out.println("Nume: " + name);
-        System.out.println("Pret: " + price);
-        System.out.println("Stoc disponibil: " + stock);
-        System.out.println("Categorie: " + category);
+    public String toString() {
+        return "Name: " + name + "\nPrice: " + price + "\nStock: " + stock + "\nCategory: " + category;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product other = (Product) o;
+        return Double.compare(other.price, price) == 0 &&
+                stock == other.stock &&
+                Objects.equals(name, other.name) &&
+                category == other.category;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, stock, category);
+    }
+
+
 }

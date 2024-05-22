@@ -1,20 +1,17 @@
 package Classes;
 
+import Enums.Permissions;
+
 import java.time.LocalDate;
 import java.util.List;
-
-enum Permission {
-    MANAGE_PRODUCTS,
-    GENERATE_REPORTS,
-    MANAGE_USERS,
-}
+import java.util.Objects;
 
 public class AdminUser extends User {
     private boolean isAdmin;
-    private List<Permission> permissions;
+    private List<Permissions> permissions;
     private int accessLevel;
 
-    public AdminUser(String name, String email, String address, LocalDate birthDate, boolean isAdmin, List<Permission> permissions, int accessLevel) {
+    public AdminUser(String name, String email, String address, LocalDate birthDate, boolean isAdmin, List<Permissions> permissions, int accessLevel) {
         super(name, email, address, birthDate);
         this.isAdmin = isAdmin;
         this.permissions = permissions;
@@ -30,11 +27,11 @@ public class AdminUser extends User {
         this.isAdmin = isAdmin;
     }
 
-    public List<Permission> getPermissions() {
+    public List<Permissions> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(List<Permissions> permissions) {
         this.permissions = permissions;
     }
 
@@ -45,5 +42,31 @@ public class AdminUser extends User {
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
     }
+
+    @Override
+    public String toString() {
+        return "AdminUser {" +
+                "\n    isAdmin: " + isAdmin() +
+                "\n    permissions: " + getPermissions() +
+                "\n    accessLevel: " + getAccessLevel() +
+                "\n}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AdminUser)) return false;
+        AdminUser other = (AdminUser) o;
+        return isAdmin == other.isAdmin &&
+                Objects.equals(permissions, other.permissions) &&
+                accessLevel == other.accessLevel;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isAdmin, permissions, accessLevel);
+    }
+
+
 }
 

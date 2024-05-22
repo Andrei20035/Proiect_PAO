@@ -1,10 +1,12 @@
 package Classes;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class DiscountCoupon {
     private String code;
     private double discountPercentage;
+    // expiration date
 
     public DiscountCoupon(String code, double discountPercentage) {
         this.code = code;
@@ -29,5 +31,26 @@ public class DiscountCoupon {
 
         return orderTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Discount coupon of " + (int)getDiscountPercentage() + "%" + " is " + getCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DiscountCoupon)) return false;
+        DiscountCoupon other = (DiscountCoupon) o;
+        return Double.compare(other.discountPercentage, discountPercentage) == 0 &&
+                Objects.equals(code, other.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, discountPercentage);
+    }
+
+
 }
 
